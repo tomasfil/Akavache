@@ -320,8 +320,10 @@ namespace Akavache
 #pragma warning restore CS8604 // Possible null reference argument.
 
             return result.SelectMany(x => x.Item2 ? Observable.Return(x.Item1) : Observable.Empty<T>())
+#pragma warning disable 8620
                 .Concat(fetch)
                 .Multicast(new ReplaySubject<T>())
+#pragma warning restore 8620
                 .RefCount();
         }
 
@@ -457,7 +459,7 @@ namespace Akavache
 
                 var ret = JsonConvert.DeserializeObject<T>(bytes, settings);
 #pragma warning disable CS8604 // Possible null reference argument.
-                return Observable.Return(ret);
+                return Observable.Return(ret)!;
 #pragma warning restore CS8604 // Possible null reference argument.
             }
             catch (Exception ex)

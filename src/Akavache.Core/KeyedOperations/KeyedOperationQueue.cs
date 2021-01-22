@@ -114,7 +114,7 @@ namespace Akavache
                     .Where(x => x.Kind != NotificationKind.OnNext)
                     .SelectMany(x =>
                         (x.Kind == NotificationKind.OnError) ?
-                            Observable.Throw<Unit>(x.Exception) :
+                            Observable.Throw<Unit>(x.Exception!) :
                             Observable.Return(Unit.Default))
                     .Multicast(_shutdownObs);
 
