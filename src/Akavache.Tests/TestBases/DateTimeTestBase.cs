@@ -136,7 +136,7 @@ public abstract class DateTimeTestBase
     }
 
     /// <summary>
-    /// Tests to make sure that we can force the DateTime kind.
+    /// Tests to make sure that DateTime gets correctly resolved back.
     /// </summary>
     /// <returns>A task to monitor the progress.</returns>
     [Fact]
