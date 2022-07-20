@@ -136,6 +136,25 @@ public abstract class DateTimeTestBase
     }
 
     /// <summary>
+    /// Tests to make sure that we can force the DateTime kind.
+    /// </summary>
+    /// <returns>A task to monitor the progress.</returns>
+    [Fact]
+    public async Task DateTimeIsCurrentlyRetreived()
+    {
+        using (Utility.WithEmptyDirectory(out var path))
+        using (var fixture = CreateBlobCache(path))
+        {
+            var dateTime = DateTime.Now;
+
+            var fetch1 = await fixture.GetOrFetchObject(nameof(DateTimeIsCurrentlyRetreived), () => Task.FromResult(dateTime), DateTimeOffset.Now.AddSeconds(10));
+            var fetch2 = await fixture.GetOrFetchObject(nameof(DateTimeIsCurrentlyRetreived), () => Task.FromResult(dateTime), DateTimeOffset.Now.AddSeconds(10));
+
+            Assert.Equal(fetch1, fetch2);
+        }
+    }
+
+    /// <summary>
     /// Gets the <see cref="IBlobCache"/> we want to do the tests against.
     /// </summary>
     /// <param name="path">The path to the blob cache.</param>
