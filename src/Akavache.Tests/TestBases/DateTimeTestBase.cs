@@ -147,8 +147,8 @@ public abstract class DateTimeTestBase
         {
             var dateTime = DateTime.Now;
 
-            var fetch1 = await fixture.GetOrFetchObject(nameof(DateTimeIsCurrentlyRetreived), () => Task.FromResult(dateTime), DateTimeOffset.Now.AddSeconds(10));
-            var fetch2 = await fixture.GetOrFetchObject(nameof(DateTimeIsCurrentlyRetreived), () => Task.FromResult(dateTime), DateTimeOffset.Now.AddSeconds(10));
+            var fetch1 = await fixture.GetOrFetchObject(nameof(DateTimeIsCurrentlyRetreived), () => Task.FromResult(dateTime), DateTimeOffset.Now.AddMinutes(10));
+            var fetch2 = await fixture.GetOrFetchObject(nameof(DateTimeIsCurrentlyRetreived), () => Task.FromResult(dateTime), DateTimeOffset.Now.AddMinutes(10));
 
             Assert.Equal(fetch1, fetch2);
         }
